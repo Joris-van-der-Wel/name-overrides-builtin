@@ -1,0 +1,20 @@
+{
+  "framework": "mocha",
+  "before_tests": "\"./node_modules/.bin/browserify\" test/name-overrides-builtin.js -o test/out/bundle.js",
+  "src_files": [
+    "lib/*",
+    "test/*"
+  ],
+  "serve_files": [
+    "test/out/bundle.js"
+  ],
+  "launchers": {
+    "node": {
+      "command": "\"./node_modules/.bin/_mocha\" -R tap",
+      "protocol": "tap"
+    }
+  },
+  "launch_in_dev": [
+    "node"
+  ]
+}

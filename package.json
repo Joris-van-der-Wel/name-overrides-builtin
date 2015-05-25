@@ -1,0 +1,39 @@
+{
+  "name": "name-overrides-builtin",
+  "version": "1.0.0",
+  "author": "Joris van der Wel <joris@jorisvanderwel.com>",
+  "description": "Test if a given name might override a property of a DOM Node marked as [OverrideBuiltins]",
+  "main": "lib/name-overrides-builtin.js",
+  "scripts": {
+    "test": "testem"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joris-van-der-Wel/name-overrides-builtin.git"
+  },
+  "keywords": [
+    "html5",
+    "OverrideBuiltins",
+    "IDL",
+    "DOM",
+    "w3",
+    "w3c",
+    "Web",
+    "IDL",
+    "named properties"
+  ],
+  "browser": {
+    "jsdom": false
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Joris-van-der-Wel/name-overrides-builtin/issues"
+  },
+  "homepage": "https://github.com/Joris-van-der-Wel/name-overrides-builtin#readme",
+  "devDependencies": {
+    "browserify": "^10.2.1",
+    "jsdom": "^5.4.3",
+    "mocha": "^2.2.5",
+    "testem": "^0.8.3"
+  }
+}
