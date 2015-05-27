@@ -24,6 +24,9 @@ Usage
 var overridesBuiltin = require('name-overrides-builtin');
 overridesBuiltin('createElement') === true;
 overridesBuiltin('foo') === false;
+overridesBuiltin('createElement', 'HTMLDocument') === true;
+overridesBuiltin('createElement', 'HTMLFormElement') === false;
 
 var list = overridesBuiltin.list(); // ['ATTRIBUTE_NODE', 'CDATA_SECTION_NODE', ...
+var list = overridesBuiltin.list('HTMLDocument');
 ```

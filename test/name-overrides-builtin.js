@@ -27,51 +27,145 @@ function getAllPropertyNames()
 describe('name-overrides-builtin', function()
 {
         var document = global.document || require('jsdom').jsdom('<html/>');
+        var documentProperties = getAllPropertyNames(document);
+        var formProperties = getAllPropertyNames(document.createElement('form'));
 
-        it('Should return true for properties that are a builtin', function()
+        // These are inconsistent between browsers:
+        var skipFormFalseCheck = [
+                // On document but not on form in chrome 43:
+                'onpointerlockchange',
+                'onpointerlockerror',
+                'onselectionchange',
+                'all', // also firefox
+
+                // On document but not on form in firefox 38:
+                'onbeforescriptexecute',
+
+                // On document but not on form in IE 11:
+                'onstop',
+                'onstoragecommit'
+        ];
+
+        var skipDocumentFalseCheck = [
+                // On form but not document in jsdom:
+                'dir',
+                'prefix', // (also chrome 43)
+                'localName',
+                'namespaceURI',
+
+                // On form but not document in lots of browsers:
+                'attributes',
+                'hasAttributes',
+                'childElementCount',
+                'children',
+                'firstElementChild',
+                'lastElementChild',
+                'parentElement',
+                'focus',
+                'contains',
+
+                // On form but not document in IE 11:
+                'onbeforecopy',
+                'onbeforecut',
+                'onbeforepaste',
+                'oncopy',
+                'oncuechange',
+                'oncut',
+                'ongotpointercapture',
+                'onmouseenter',
+                'onmouseleave',
+                'onpaste',
+                'releasePointerCapture'
+        ];
+
+        documentProperties.forEach(function (name)
         {
-                getAllPropertyNames(document).forEach(function (name)
+                if (require('jsdom').jsdom && name[0] === '_')
                 {
-                        if (require('jsdom').jsdom && name[0] === '_')
-                        {
-                                // skip jsdom interal property
-                                // (also, jsdom does not support [OverrideBuiltins] yet)
-                                return;
-                        }
+                        // skip jsdom interal property
+                        // (also, jsdom does not support [OverrideBuiltins] yet)
+                        return;
+                }
 
-                        if (name[0] === '@' && name[1] === '@')
-                        {
-                                // skip properties added by es6-symbol polyfill
-                                return;
-                        }
+                if (name[0] === '@' && name[1] === '@')
+                {
+                        // skip properties added by es6-symbol polyfill
+                        return;
+                }
 
-                        assert.strictEqual(overridesBuiltin(name), true, name + ' should return true (document)');
+                it('overridesBuiltin("' + name + '", "HTMLDocument") === true', function()
+                {
+                        assert.strictEqual(overridesBuiltin(name, 'HTMLDocument'), true);
+                        assert.strictEqual(overridesBuiltin(name, 'document'), true);
                 });
 
-                getAllPropertyNames(document.createElement('form')).forEach(function (name)
+                it('overridesBuiltin("' + name + '") === true', function()
                 {
-                        if (require('jsdom').jsdom && name[0] === '_')
-                        {
-                                // skip jsdom interal property
-                                // (also, jsdom does not support [OverrideBuiltins] yet)
-                                return;
-                        }
-
-                        if (name[0] === '@' && name[1] === '@')
-                        {
-                                // skip properties added by es6-symbol polyfill
-                                return;
-                        }
-
-                        assert.strictEqual(overridesBuiltin(name), true, name + ' should return true (form)');
+                        assert.strictEqual(overridesBuiltin(name), true);
                 });
+
+                if (formProperties.indexOf(name) < 0 && skipFormFalseCheck.indexOf(name) < 0)
+                {
+                        it('overridesBuiltin("' + name + '", "HTMLFormElement") === false', function()
+                        {
+                                assert.strictEqual(overridesBuiltin(name, 'HTMLFormElement'), false);
+                        });
+                }
         });
 
-        it('Should return false for properties that are not a builtin', function()
+        formProperties.forEach(function (name)
         {
-                assert.strictEqual(overridesBuiltin('foo'), false, 'foo should be allowed');
-                assert.strictEqual(overridesBuiltin('firstchild'), false, 'match should be case sensitive');
-                assert.strictEqual(overridesBuiltin('bar'), false, 'bar should be allowed');
-                assert.strictEqual(overridesBuiltin(''), false, 'empty string should be allowed');
+                if (require('jsdom').jsdom && name[0] === '_')
+                {
+                        // skip jsdom interal property
+                        // (also, jsdom does not support [OverrideBuiltins] yet)
+                        return;
+                }
+
+                if (name[0] === '@' && name[1] === '@')
+                {
+                        // skip properties added by es6-symbol polyfill
+                        return;
+                }
+
+                it('overridesBuiltin("' + name + '", "HTMLFormElement") === true', function()
+                {
+                        assert.strictEqual(overridesBuiltin(name, 'HTMLFormElement'), true);
+                        assert.strictEqual(overridesBuiltin(name, 'form'), true);
+                });
+
+                it('overridesBuiltin("' + name + '") === true', function()
+                {
+                        assert.strictEqual(overridesBuiltin(name), true);
+                });
+
+                if (documentProperties.indexOf(name) < 0 && skipDocumentFalseCheck.indexOf(name) < 0)
+                {
+                        it('overridesBuiltin("' + name + '", "HTMLDocument") === false', function()
+                        {
+                                assert.strictEqual(overridesBuiltin(name, 'HTMLDocument'), false);
+                        });
+                }
+        });
+
+
+        it('overridesBuiltin("foo", "HTMLDocument") === false', function()
+        {
+                assert.strictEqual(overridesBuiltin('foo'), false);
+        });
+
+        it('overridesBuiltin("bar", "HTMLDocument") === false', function()
+        {
+                assert.strictEqual(overridesBuiltin('bar'), false);
+        });
+
+        it('overridesBuiltin("firstchild", "HTMLDocument") === false', function()
+        {
+                assert.strictEqual(overridesBuiltin('firstchild'), false);
+        });
+
+        it('overridesBuiltin("", "HTMLDocument") === false', function()
+        {
+                assert.strictEqual(overridesBuiltin(''), false);
         });
 });
