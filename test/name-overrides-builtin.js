@@ -85,7 +85,10 @@ describe('name-overrides-builtin', function()
                 'releasePointerCapture',
 
                 // On form but not document in IE 9:
-                'onresize'
+                'onresize',
+
+                // On form but not on document in Safari 5.1:
+                'hidden'
         ];
 
         documentProperties.forEach(function (name)
