@@ -29,17 +29,20 @@ module.exports = function(config)
         );
 
         var launchers = {
-                'SL_FireFox': {
+                'SL_FireFox37': {
                         base: 'SauceLabs',
-                        browserName: 'firefox'
+                        browserName: 'firefox',
+                        version: '37'
                 },
-                'SL_Chrome': {
+                'SL_Chrome43': {
                         base: 'SauceLabs',
-                        browserName: 'chrome'
+                        browserName: 'chrome',
+                        version: '43'
                 },
-                'SL_Safari': {
+                'SL_Safari5': {
                         base: 'SauceLabs',
-                        browserName: 'safari'
+                        browserName: 'safari',
+                        version: '5'
                 },
                 'SL_IE11': {
                         base: 'SauceLabs',
