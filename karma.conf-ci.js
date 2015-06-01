@@ -3,19 +3,30 @@ var fs = require('fs');
 
 module.exports = function(config)
 {
-        if (!process.env.SAUCE_USERNAME)
+        if (fs.existsSync('sauce.json'))
         {
-                if (!fs.existsSync('sauce.json'))
+                var sauceConfig = require('./sauce');
+                process.env.SAUCE_USERNAME = sauceConfig.username;
+                process.env.SAUCE_ACCESS_KEY = sauceConfig.accessKey;
+
+                if (sauceConfig.buildNumber)
                 {
-                        console.log('Create a sauce.json with your credentials based on the sauce-sample.json file.');
-                        process.exit(1);
-                }
-                else
-                {
-                        process.env.SAUCE_USERNAME = require('./sauce').username;
-                        process.env.SAUCE_ACCESS_KEY = require('./sauce').accessKey;
+                        process.env.BUILD_NUMBER = sauceConfig.buildNumber;
                 }
         }
+
+        if (!process.env.SAUCE_USERNAME)
+        {
+                console.log('Create a sauce.json with the keys "username" and "accessKey".');
+                process.exit(1);
+        }
+
+        console.log('Build number:',
+                process.env.TRAVIS_BUILD_NUMBER ||
+                process.env.BUILD_NUMBER ||
+                process.env.BUILD_TAG ||
+                process.env.CIRCLE_BUILD_NUM
+        );
 
         var launchers = {
                 'SL_FireFox': {
