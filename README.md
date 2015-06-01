@@ -1,6 +1,8 @@
 name-overrides-builtin
 ======================
-Test if a given name might override a property of a DOM Node marked as [`[OverrideBuiltins]`](http://www.w3.org/TR/WebIDL/#OverrideBuiltins). To be specific, `HTMLDocument` and `HTMLFormElement`. This package uses a list so that it works in javascript implementations that do not have DOM and to make sure the behaviour is consistent between browser versions. 
+Test if a given name might override a property of a DOM Node marked as [`[OverrideBuiltins]`](http://www.w3.org/TR/WebIDL/#OverrideBuiltins). To be specific, `HTMLDocument` and `HTMLFormElement`. This package uses a list so that it works in javascript implementations that do not have DOM and to make sure the behaviour is consistent between browser versions.
+ 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/nameoverridesbuiltin.svg)](https://saucelabs.com/u/nameoverridesbuiltin)
 
 If an element qualifies as a [named property](http://www.w3.org/TR/WebIDL/#idl-named-properties) because of its _name_ or _id_ attribute, the value of that attribute is used to set a property on `HTMLDocument` and `HTMLFormElement` instances. This property overrides any built in property, such as `createElement`, `firstChild`, etc. For example:
 
