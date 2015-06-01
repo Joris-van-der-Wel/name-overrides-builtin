@@ -43,7 +43,14 @@ describe('name-overrides-builtin', function()
 
                 // On document but not on form in IE 11:
                 'onstop',
-                'onstoragecommit'
+                'onstoragecommit',
+
+                // On document but not on form in IE 10:
+                'hidden',
+
+                // on document & form in IE 9:
+                'readyState',
+                'onreadystatechange'
         ];
 
         var skipDocumentFalseCheck = [
@@ -75,7 +82,10 @@ describe('name-overrides-builtin', function()
                 'onmouseenter',
                 'onmouseleave',
                 'onpaste',
-                'releasePointerCapture'
+                'releasePointerCapture',
+
+                // On form but not document in IE 9:
+                'onresize'
         ];
 
         documentProperties.forEach(function (name)
