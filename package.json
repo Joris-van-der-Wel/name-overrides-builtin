@@ -5,7 +5,8 @@
   "description": "Test if a given name might override a property of a DOM Node marked as [OverrideBuiltins]",
   "main": "lib/name-overrides-builtin.js",
   "scripts": {
-    "test": "testem"
+    "test": "mocha && karma start karma.conf.js",
+    "ci": "karma start karma.conf-ci.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,12 @@
   "homepage": "https://github.com/Joris-van-der-Wel/name-overrides-builtin#readme",
   "devDependencies": {
     "browserify": "^10.2.1",
-    "jsdom": "^5.4.3",
-    "mocha": "^2.2.5",
-    "testem": "^0.8.3"
+    "jsdom": ">=5",
+    "karma": "^0.12.35",
+    "karma-browserify": "^4.2.1",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "^0.1.10",
+    "karma-sauce-launcher": "^0.2.11",
+    "mocha": "^2.2.5"
   }
 }
