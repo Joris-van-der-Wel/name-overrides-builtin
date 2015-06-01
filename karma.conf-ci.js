@@ -55,6 +55,11 @@ module.exports = function(config)
                         base: 'SauceLabs',
                         browserName: 'internet explorer',
                         version: '9'
+                },
+                'SL_Android5.1': {
+                        base: 'SauceLabs',
+                        browserName: 'android',
+                        version: '5.1'
                 }
         };
 
