@@ -63,6 +63,11 @@ module.exports = function(config)
                         base: 'SauceLabs',
                         browserName: 'android',
                         version: '5.1'
+                },
+                'SL_iPad8.2': {
+                        base: 'SauceLabs',
+                        browserName: 'iPad',
+                        version: '8.2'
                 }
         };
 
