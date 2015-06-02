@@ -59,10 +59,15 @@ module.exports = function(config)
                         browserName: 'internet explorer',
                         version: '9'
                 },
-                'SL_Android5.1': {
+                'SL_Android_Lollipop': {
                         base: 'SauceLabs',
                         browserName: 'android',
                         version: '5.1'
+                },
+                'SL_Android_KitKat': {
+                        base: 'SauceLabs',
+                        browserName: 'android',
+                        version: '4.4'
                 },
                 'SL_iPad8.2': {
                         base: 'SauceLabs',
