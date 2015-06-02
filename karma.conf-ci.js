@@ -74,6 +74,11 @@ module.exports = function(config)
                         browserName: 'android',
                         version: '4.3'
                 },
+                'SL_Android_IceCreamSandwich': {
+                        base: 'SauceLabs',
+                        browserName: 'android',
+                        version: '4.0'
+                },
                 'SL_iPad8.2': {
                         base: 'SauceLabs',
                         browserName: 'iPad',
