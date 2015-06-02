@@ -69,6 +69,11 @@ module.exports = function(config)
                         browserName: 'android',
                         version: '4.4'
                 },
+                'SL_Android_JellyBean': {
+                        base: 'SauceLabs',
+                        browserName: 'android',
+                        version: '4.3'
+                },
                 'SL_iPad8.2': {
                         base: 'SauceLabs',
                         browserName: 'iPad',
