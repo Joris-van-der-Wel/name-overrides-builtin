@@ -29,26 +29,6 @@ module.exports = function(config)
         );
 
         var launchers = {
-                'SL_Android_Lollipop': {
-                        base: 'SauceLabs',
-                        browserName: 'android',
-                        version: '5.1'
-                },
-                'SL_Android_KitKat': {
-                        base: 'SauceLabs',
-                        browserName: 'android',
-                        version: '4.4'
-                },
-                'SL_Android_JellyBean': {
-                        base: 'SauceLabs',
-                        browserName: 'android',
-                        version: '4.3'
-                },
-                'SL_Android_IceCreamSandwich': {
-                        base: 'SauceLabs',
-                        browserName: 'android',
-                        version: '4.0'
-                },
                 'SL_iPad8.2': {
                         base: 'SauceLabs',
                         browserName: 'iPad',
@@ -94,12 +74,26 @@ module.exports = function(config)
                         version: version
                 };
         }
+
+        function androidChrome(version)
+        {
+                version = String(version);
+                launchers['SL_Android_' + version] = {
+                        base: 'SauceLabs',
+                        browserName: 'android',
+                        version: version
+                };
+        }
         var v;
 
         for (v =  4; v <= 37; ++v) { firefox(v); }
         for (v = 26; v <= 43; ++v) { chrome(v); }
         for (v =  9; v <= 11; ++v) { explorer(v); }
         for (v =  5; v <=  8; ++v) { safari(v); }
+        androidChrome('5.1');
+        androidChrome('4.4');
+        androidChrome('4.3');
+        androidChrome('4.0');
 
         config.set({
                 basePath: '',
