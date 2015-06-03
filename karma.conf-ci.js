@@ -28,14 +28,6 @@ module.exports = function(config)
                 process.env.CIRCLE_BUILD_NUM
         );
 
-        var launchers = {
-                'SL_iPad8.2': {
-                        base: 'SauceLabs',
-                        browserName: 'iPad',
-                        version: '8.2'
-                }
-        };
-
         function firefox(version)
         {
                 version = String(version);
@@ -84,6 +76,18 @@ module.exports = function(config)
                         version: version
                 };
         }
+
+        function iPadSafari(version)
+        {
+                version = String(version);
+                launchers['SL_iPad_' + version] = {
+                        base: 'SauceLabs',
+                        browserName: 'iPad',
+                        version: version
+                };
+        }
+
+        var launchers = {};
         var v;
 
         for (v =  4; v <= 37; ++v) { firefox(v); }
@@ -97,6 +101,7 @@ module.exports = function(config)
         androidChrome('4.2');
         androidChrome('4.1');
         androidChrome('4.0');
+        iPadSafari('8.2');
 
         config.set({
                 basePath: '',
