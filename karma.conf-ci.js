@@ -59,6 +59,12 @@ module.exports = function(config)
                         browserName: 'chrome',
                         version: '43'
                 },
+                'SL_Chrome27': {
+                        // last one using webkit
+                        base: 'SauceLabs',
+                        browserName: 'chrome',
+                        version: '27'
+                },
                 'SL_Safari5': {
                         base: 'SauceLabs',
                         browserName: 'safari',
