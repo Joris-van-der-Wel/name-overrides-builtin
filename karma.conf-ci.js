@@ -99,7 +99,7 @@ module.exports = function(config)
         for (v =  4; v <= 37; ++v) { firefox(v); }
         for (v = 26; v <= 43; ++v) { chrome(v); }
         for (v =  9; v <= 11; ++v) { explorer(v); }
-        for (v =  5; v <=  6; ++v) { safari(v); }
+        for (v =  5; v <=  8; ++v) { safari(v); }
 
         config.set({
                 basePath: '',
