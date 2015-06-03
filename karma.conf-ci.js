@@ -91,8 +91,11 @@ module.exports = function(config)
         for (v =  9; v <= 11; ++v) { explorer(v); }
         for (v =  5; v <=  8; ++v) { safari(v); }
         androidChrome('5.1');
+        androidChrome('5.0');
         androidChrome('4.4');
         androidChrome('4.3');
+        androidChrome('4.2');
+        androidChrome('4.1');
         androidChrome('4.0');
 
         config.set({
