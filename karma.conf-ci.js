@@ -29,21 +29,6 @@ module.exports = function(config)
         );
 
         var launchers = {
-                'SL_IE11': {
-                        base: 'SauceLabs',
-                        browserName: 'internet explorer',
-                        version: '11'
-                },
-                'SL_IE10': {
-                        base: 'SauceLabs',
-                        browserName: 'internet explorer',
-                        version: '10'
-                },
-                'SL_IE9': {
-                        base: 'SauceLabs',
-                        browserName: 'internet explorer',
-                        version: '9'
-                },
                 'SL_Android_Lollipop': {
                         base: 'SauceLabs',
                         browserName: 'android',
@@ -91,10 +76,21 @@ module.exports = function(config)
                 }
         }
 
+        function explorer(version)
+        {
+                version = String(version);
+                launchers['SL_IE_' + version] = {
+                        base: 'SauceLabs',
+                        browserName: 'internet explorer',
+                        version: version
+                };
+        }
+
         var v;
 
         for (v =  4; v <= 37; ++v) { firefox(v); }
         for (v = 26; v <= 43; ++v) { chrome(v); }
+        for (v =  9; v <= 11; ++v) { explorer(v); }
 
         config.set({
                 basePath: '',
