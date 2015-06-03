@@ -96,7 +96,11 @@ describe('name-overrides-builtin', function()
                 // On form but not document in firefox 23:
                 'QueryInterface',
                 'getUserData',
-                'setUserData'
+                'setUserData',
+
+                // on form but not document in chrome 35
+                'onautocomplete',
+                'onautocompleteerror'
         ];
 
         documentProperties.forEach(function (name)
