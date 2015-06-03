@@ -29,22 +29,6 @@ module.exports = function(config)
         );
 
         var launchers = {
-                'SL_Chrome43': {
-                        base: 'SauceLabs',
-                        browserName: 'chrome',
-                        version: '43'
-                },
-                'SL_Chrome27': {
-                        // last one using webkit
-                        base: 'SauceLabs',
-                        browserName: 'chrome',
-                        version: '27'
-                },
-                'SL_Safari5': {
-                        base: 'SauceLabs',
-                        browserName: 'safari',
-                        version: '5'
-                },
                 'SL_IE11': {
                         base: 'SauceLabs',
                         browserName: 'internet explorer',
@@ -96,9 +80,22 @@ module.exports = function(config)
                         browserName: 'firefox'
                 }
         }
+
+        function chrome(version)
+        {
+                version = String(version);
+                launchers['SL_Chrome_'+version] = {
+                        version: version,
+                        base: 'SauceLabs',
+                        browserName: 'chrome'
+                }
+        }
+
         var v;
 
         for (v =  4; v <= 37; ++v) { firefox(v); }
+        for (v = 26; v <= 43; ++v) { chrome(v); }
+
         config.set({
                 basePath: '',
                 frameworks: ['mocha', 'browserify'],
