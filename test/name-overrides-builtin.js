@@ -41,6 +41,9 @@ describe('name-overrides-builtin', function()
                 // On document but not on form in firefox 38:
                 'onbeforescriptexecute',
 
+                // On document but not on form in firefox 24 (present in firefox 17):
+                'onafterscriptexecute',
+
                 // On document but not on form in IE 11:
                 'onstop',
                 'onstoragecommit',
