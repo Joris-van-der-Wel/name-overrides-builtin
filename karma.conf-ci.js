@@ -98,7 +98,7 @@ module.exports = function(config)
         }
         var v;
 
-        for (v = 23; v <= 37; ++v) { firefox(v); }
+        for (v =  4; v <= 37; ++v) { firefox(v); }
         config.set({
                 basePath: '',
                 frameworks: ['mocha', 'browserify'],
