@@ -91,7 +91,12 @@ describe('name-overrides-builtin', function()
                 'onresize',
 
                 // On form but not on document in Safari 5.1:
-                'hidden'
+                'hidden',
+
+                // On form but not document in firefox 23:
+                'QueryInterface',
+                'getUserData',
+                'setUserData'
         ];
 
         documentProperties.forEach(function (name)
