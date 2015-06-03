@@ -29,31 +29,6 @@ module.exports = function(config)
         );
 
         var launchers = {
-                'SL_FireFox37': {
-                        base: 'SauceLabs',
-                        browserName: 'firefox',
-                        version: '37'
-                },
-                'SL_FireFox31esr': {
-                        base: 'SauceLabs',
-                        browserName: 'firefox',
-                        version: '31'
-                },
-                'SL_FireFox24esr': {
-                        base: 'SauceLabs',
-                        browserName: 'firefox',
-                        version: '24'
-                },
-                'SL_FireFox23': {
-                        base: 'SauceLabs',
-                        browserName: 'firefox',
-                        version: '23'
-                },
-                'SL_FireFox17esr': {
-                        base: 'SauceLabs',
-                        browserName: 'firefox',
-                        version: '17'
-                },
                 'SL_Chrome43': {
                         base: 'SauceLabs',
                         browserName: 'chrome',
@@ -112,6 +87,18 @@ module.exports = function(config)
                 }
         };
 
+        function firefox(version)
+        {
+                version = String(version);
+                launchers['SL_Firefox_'+version] = {
+                        version: version,
+                        base: 'SauceLabs',
+                        browserName: 'firefox'
+                }
+        }
+        var v;
+
+        for (v = 23; v <= 37; ++v) { firefox(v); }
         config.set({
                 basePath: '',
                 frameworks: ['mocha', 'browserify'],
