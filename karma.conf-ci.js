@@ -86,11 +86,20 @@ module.exports = function(config)
                 };
         }
 
+        function safari(version)
+        {
+                launchers['SL_Safari_' + version] = {
+                        base: 'SauceLabs',
+                        browserName: 'safari',
+                        version: version
+                };
+        }
         var v;
 
         for (v =  4; v <= 37; ++v) { firefox(v); }
         for (v = 26; v <= 43; ++v) { chrome(v); }
         for (v =  9; v <= 11; ++v) { explorer(v); }
+        for (v =  5; v <=  6; ++v) { safari(v); }
 
         config.set({
                 basePath: '',
