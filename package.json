@@ -6,7 +6,7 @@
   "main": "lib/name-overrides-builtin.js",
   "scripts": {
     "test": "grunt test",
-    "ci": "grunt ci"
+    "ci": "grunt ci --force"
   },
   "repository": {
     "type": "git",
