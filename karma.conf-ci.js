@@ -60,6 +60,7 @@ module.exports = function(config)
                 sauceLabs: {
                         testName: 'name-overrides-builtin karma'
                 },
+                captureTimeout: 5 * 60 * 1000,
                 customLaunchers: launchers,
                 browsers: Object.keys(launchers),
                 singleRun: true
