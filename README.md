@@ -29,6 +29,29 @@ overridesBuiltin('foo') === false;
 overridesBuiltin('createElement', 'HTMLDocument') === true;
 overridesBuiltin('createElement', 'HTMLFormElement') === false;
 
-var list = overridesBuiltin.list(); // ['ATTRIBUTE_NODE', 'CDATA_SECTION_NODE', ...
+// returns ['ATTRIBUTE_NODE', 'CDATA_SECTION_NODE', ...
+var list = overridesBuiltin.list();
 var list = overridesBuiltin.list('HTMLDocument');
+```
+
+DOMPurify
+---------
+[DOMPurify](https://www.npmjs.com/package/dompurify) is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG. 
+
+DOMPurify checks for named property clobbering by inspecting the browser it is running in. This is not adequate for some use cases. For example if you are sanitizing only on the server side (e.g. node.js + [jsdom](https://www.npmjs.com/package/jsdom)) and sending that content to various browsers, properties or method that are implemented in browsers but not jsdom are able to be overridden.
+ 
+For such a use case, this library provides a convenient hook:
+
+```javascript
+var window = require('jsdom').jsdom().defaultView;
+var DOMPurify = require('dompurify')(window);
+var overridesBuiltin = require('name-overrides-builtin');
+
+// returns '<img id="webkitRequestFullScreen" src="cat.png">'
+DOMPurify.sanitize('<img id="webkitRequestFullScreen" src="cat.png">');
+
+overridesBuiltin.addDOMPurifyHook(DOMPurify);
+
+// returns '<img src="cat.png">'
+DOMPurify.sanitize('<img id="webkitRequestFullScreen" src="cat.png">');
 ```

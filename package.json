@@ -43,6 +43,7 @@
     "karma-cli": "0.0.4",
     "karma-mocha": "^0.1.10",
     "karma-sauce-launcher": "^0.2.11",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "dompurify": ">=0.6.4"
   }
 }

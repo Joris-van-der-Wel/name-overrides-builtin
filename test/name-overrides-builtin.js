@@ -27,6 +27,7 @@ function getAllPropertyNames()
 describe('name-overrides-builtin', function()
 {
         var document = global.document || require('jsdom').jsdom('<html/>');
+        var window = document.defaultView;
         var documentProperties = getAllPropertyNames(document);
         var formProperties = getAllPropertyNames(document.createElement('form'));
 
@@ -192,5 +193,35 @@ describe('name-overrides-builtin', function()
         it('overridesBuiltin("", "HTMLDocument") === false', function()
         {
                 assert.strictEqual(overridesBuiltin(''), false);
+        });
+
+        it('should provide a hook for DOMPurify', function()
+        {
+                var DOMPurify = require('dompurify')(window);
+                overridesBuiltin.addDOMPurifyHook(DOMPurify);
+
+                overridesBuiltin.list().forEach(function(name)
+                {
+                        if (name === 'createElement' ||
+                            name === 'implementation' ||
+                            name === 'createNodeIterator')
+                        {
+                                // DOMPurify always clears these (or, an old version did),
+                                return;
+                        }
+
+
+                        var payload = '12<input name="' + name + '" value="foo">34<img id="'+name+'">5';
+                        assert.strictEqual(
+                                DOMPurify.sanitize(payload, {SANITIZE_DOM: false}),
+                                '12<input value="foo">34<img>5',
+                                'payload: ' + payload
+                        );
+                });
+
+                assert.strictEqual(
+                        DOMPurify.sanitize('12<input name="foo">34<img id="bar">5', {SANITIZE_DOM: false}),
+                        '12<input name="foo">34<img id="bar">5'
+                );
         });
 });
