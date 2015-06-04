@@ -1,6 +1,6 @@
 {
   "name": "name-overrides-builtin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Joris van der Wel <joris@jorisvanderwel.com>",
   "description": "Test if a given name might override a property of a DOM Node marked as [OverrideBuiltins]",
   "main": "lib/name-overrides-builtin.js",
