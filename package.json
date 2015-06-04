@@ -5,8 +5,8 @@
   "description": "Test if a given name might override a property of a DOM Node marked as [OverrideBuiltins]",
   "main": "lib/name-overrides-builtin.js",
   "scripts": {
-    "test": "mocha && karma start karma.conf.js",
-    "ci": "karma start karma.conf-ci.js"
+    "test": "grunt test",
+    "ci": "grunt ci"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,10 @@
   "homepage": "https://github.com/Joris-van-der-Wel/name-overrides-builtin#readme",
   "devDependencies": {
     "browserify": "^10.2.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-karma": "^0.11.0",
+    "grunt-mocha-test": "^0.12.7",
     "jsdom": ">=5",
     "karma": "^0.12.35",
     "karma-browserify": "^4.2.1",
