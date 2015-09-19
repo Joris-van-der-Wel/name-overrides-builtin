@@ -62,7 +62,7 @@ function iPadSafari(version)
 var v;
 
 for (v =  4; v <= 37; ++v) { firefox(v); }
-for (v = 26; v <= 43; ++v) { chrome(v); }
+for (v = 26; v <= 45; ++v) { chrome(v); }
 for (v =  9; v <= 11; ++v) { explorer(v); }
 for (v =  5; v <=  8; ++v) { safari(v); }
 androidChrome('5.1');
